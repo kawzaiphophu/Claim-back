@@ -13,13 +13,14 @@ const mongoose = require('mongoose')
 // })
 // module.exports = mongoose.model('Claim', ClaimSchema)
 const claimSchema = new mongoose.Schema({
-    name: { type: String },
-    tel: { type: String },
-    cTel: { type: String },
-    nameProduct: { type: String },
-    sn: { type: String },
-    symp: { type: String },
-    from: { type: String },
+    name: { type: String, default: '' },
+    tel: { type: String, default: '' },
+    cTel: { type: String, default: '' },
+    nameProduct: { type: String, default: '' },
+    sn: { type: String, default: '' },
+    symp: { type: String, default: '' },
+    from: { type: String, default: '' },
+    status: { type: String, default: 'รับเข้าสาขา' },
     update_at: { type: Date, default:Date.now },
 }, { collection: 'list' });
 
