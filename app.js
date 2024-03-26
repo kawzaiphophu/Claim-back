@@ -75,21 +75,12 @@ app.patch('/claimlist/:id/edit', async (req, res) => {
     const { status } = req.body;
   
     try {
-        // Find the item by ID
         const foundItem = await Claim.findById(itemId);
-
-        // Check if the item exists
         if (!foundItem) {
             return res.status(404).json({ error: 'Item not found' });
         }
-
-        // Update the status field with the new value
         foundItem.status = status;
-
-        // Save the updated document
         const updatedItem = await foundItem.save();
-
-        // Send the updated item as a response
         res.json(updatedItem);
     } catch (error) {
         console.error('Error updating item:', error);
