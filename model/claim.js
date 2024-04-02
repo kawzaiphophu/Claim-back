@@ -14,3 +14,4 @@ const claimSchema = new mongoose.Schema({
 
 const Claim = mongoose.model('list', claimSchema);
 module.exports = Claim
+

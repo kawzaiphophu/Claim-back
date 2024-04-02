@@ -8,7 +8,7 @@ const { PORT, MONGO_HOSTNAME, MONGO_PORT, MONGO_PATH } = process.env;
 const router = require('./routes/claims')
 const Claim = require('./model/claim');
 
-mongoose.connect(`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_PATH}`)
+mongoose.connect(`mongodb+srv://${MONGO_HOSTNAME}@${MONGO_PORT}/${MONGO_PATH}`)
     .then((e) => console.log("Connected"))
     .catch((err) => console.log(err));
 
