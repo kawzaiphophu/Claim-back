@@ -20,7 +20,9 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+app.use("/",(req,res)=>{
+    res.send("Server is running")
+})
 //list claim all
 app.get("/claimlist", async (req, res) => {
     const claims = await Claim.find();
