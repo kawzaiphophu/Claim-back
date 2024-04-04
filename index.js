@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { MONGO_HOSTNAME, MONGO_PORT, MONGO_PATH } = process.env;
+const {PORT, MONGO_HOSTNAME, MONGO_PORT, MONGO_PATH } = process.env;
 const router = require('./routes/claims');
 const Claim = require('./model/claim');
 
@@ -20,15 +20,20 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
     res.send("Server is running");
 });
 
 //list claim all
 app.get("/claimlist", async (req, res) => {
-    const claims = await Claim.find();
-    res.send("this is claimlist");
-    return res.json(claims);
+    try {
+        const claims = await Claim.find();
+        return res.json(claims);
+        
+    } catch (error) {
+        console.error("Error fetching claims:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 //post add claim
@@ -87,5 +92,8 @@ app.patch('/claimlist/:id/edit', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+app.listen(PORT, () => {
+    console.log(`✅ Server is running on port ${PORT}`);
+  })
 
 module.exports = app;
